@@ -1,4 +1,4 @@
-package cn.cjp.base;
+package cn.cjp.base.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
