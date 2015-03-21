@@ -1,4 +1,4 @@
-package cn.cjp.base.utils;
+package cn.cjp.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
