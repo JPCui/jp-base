@@ -106,13 +106,6 @@ public class BaseEntityModel extends BaseModel{
 		this.remarks = remarks;
 	}
 
-	/*
-	 * public String getFrom() { return from; }
-	 */
-	/*
-	 * public void setFrom(String from) { this.from = from; }
-	 */
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,

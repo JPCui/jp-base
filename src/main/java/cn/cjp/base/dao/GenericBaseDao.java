@@ -9,8 +9,16 @@ public interface GenericBaseDao<T> extends Serializable {
 	 * save or update
 	 * 
 	 * @param entity
+	 * @deprecated use saveOrUpdate instead
 	 */
 	public void save(T entity);
+
+	/**
+	 * 如果存在Id，则update，否则save
+	 * 
+	 * @param entity
+	 */
+	public void saveOrUpdate(T entity);
 
 	/**
 	 * 根据ID查询
@@ -25,6 +33,7 @@ public interface GenericBaseDao<T> extends Serializable {
 	 * 更新
 	 * 
 	 * @param entity
+	 * @deprecated use saveOrUpdate instead
 	 */
 	public void update(T entity);
 
@@ -34,9 +43,9 @@ public interface GenericBaseDao<T> extends Serializable {
 	 * @param id
 	 */
 	public void delete(long id);
-	
+
 	public List<T> findAll();
-	
+
 	public List<T> findAll(int pageNum, int pageSize);
 
 	/**

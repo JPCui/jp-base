@@ -2,8 +2,6 @@ package cn.cjp.base.controller;
 
 import java.util.List;
 
-import cn.cjp.base.model.BaseEntityModel;
-
 /**
  * 
  * @author SucreCui
@@ -16,43 +14,15 @@ public class WebResult {
 	 */
 	private int code;
 
-	private List<BaseEntityModel> modelList;
+	private List<Object> objectList;
 	
-	private BaseEntityModel model;
+	private Object object;
 	
 	private String message;
 	
 	private String error;
 	
 	private String resultUrl;
-
-	/**
-	 * @return the modelList
-	 */
-	public List<BaseEntityModel> getModelList() {
-		return modelList;
-	}
-
-	/**
-	 * @param modelList the modelList to set
-	 */
-	public void setModelList(List<BaseEntityModel> modelList) {
-		this.modelList = modelList;
-	}
-
-	/**
-	 * @return the model
-	 */
-	public BaseEntityModel getModel() {
-		return model;
-	}
-
-	/**
-	 * @param model the model to set
-	 */
-	public void setModel(BaseEntityModel model) {
-		this.model = model;
-	}
 
 	/**
 	 * @return the code
@@ -108,6 +78,34 @@ public class WebResult {
 	 */
 	public void setError(String error) {
 		this.error = error;
+	}
+
+	/**
+	 * @return the objectList
+	 */
+	public List<Object> getObjectList() {
+		return objectList;
+	}
+
+	/**
+	 * @param objectList the objectList to set
+	 */
+	public void setObjectList(List<Object> objectList) {
+		this.objectList = objectList;
+	}
+
+	/**
+	 * @return the object
+	 */
+	public Object getObject() {
+		return object;
+	}
+
+	/**
+	 * @param object the object to set
+	 */
+	public void setObject(Object object) {
+		this.object = object;
 	}
 }
 
