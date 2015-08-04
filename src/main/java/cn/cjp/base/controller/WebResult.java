@@ -108,30 +108,3 @@ public class WebResult {
 		this.object = object;
 	}
 }
-
-enum WebResultCode{
-	
-	SUCCESS(200), ERROR(500);
-	
-	private int code;
-	
-	WebResultCode(int code){
-		this.setCode(code);
-	}
-
-	/**
-	 * @return the code
-	 */
-	public int getCode() {
-		return code;
-	}
-
-	/**
-	 * @param code the code to set
-	 */
-	public void setCode(int code) {
-		this.code = code;
-	}
-	
-	
-}

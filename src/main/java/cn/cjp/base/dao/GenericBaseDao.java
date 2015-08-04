@@ -12,6 +12,8 @@ public interface GenericBaseDao<T> extends Serializable {
 	 * @deprecated use saveOrUpdate instead
 	 */
 	public void save(T entity);
+	
+	public List<Object> query(String hql);
 
 	/**
 	 * 如果存在Id，则update，否则save

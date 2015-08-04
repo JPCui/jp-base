@@ -6,7 +6,7 @@ public class WebResultTest {
 
 	@Test
 	public void testResultCode(){
-		System.out.println(WebResultCode.SUCCESS.getCode());
+		System.out.println(HttpCode.SUCCESS);
 	}
 	
 }

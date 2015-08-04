@@ -1,5 +1,7 @@
 package cn.cjp.utils;
 
+import java.util.List;
+
 public class Page {
 
 	/**
@@ -34,6 +36,10 @@ public class Page {
 	 * 数据总数
 	 */
 	public long countOfData;
+	
+	private List<Object> resultList;
+	
+	private Object object;
 
 	/**
 	 * 初始化PageUtil
@@ -53,6 +59,11 @@ public class Page {
 		this.compute();
 	}
 	
+	public Page(int currPage, int sizeOfPage, long countOfData, List<Object> resultList) {
+		this(currPage, sizeOfPage, countOfData);
+		this.setResultList(resultList);
+	}
+	
 	/**
 	 * 计算出所有属性的值
 	 */
@@ -67,6 +78,34 @@ public class Page {
 		}else{
 			endRowInCurrPage = currPage * sizeOfPage;
 		}
+	}
+
+	/**
+	 * @return the resultList
+	 */
+	public List<Object> getResultList() {
+		return resultList;
+	}
+
+	/**
+	 * @param resultList the resultList to set
+	 */
+	public void setResultList(List<Object> resultList) {
+		this.resultList = resultList;
+	}
+
+	/**
+	 * @return the object
+	 */
+	public Object getObject() {
+		return object;
+	}
+
+	/**
+	 * @param object the object to set
+	 */
+	public void setObject(Object object) {
+		this.object = object;
 	}
 
 }

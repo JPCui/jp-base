@@ -12,6 +12,11 @@ public class JPThread extends Thread {
 	private Long beginTime = 0L;
 
 	private Runnable runnable;
+	
+	/**
+	 * 存储一些对象信息
+	 */
+	private Object object;
 
 	/**
 	 * 设置运行单位
@@ -23,21 +28,9 @@ public class JPThread extends Thread {
 	}
 
 	public void run() {
-		System.out.println("begin");
 		beginTime = System.currentTimeMillis();
 		runnable.run();
-		// try {
-		// new Callable<Boolean>() {
-		// public Boolean call() throws Exception {
-		// return null;
-		// }
-		// }.call();
-		// } catch (Exception e) {
-		// System.err.println("运行失败。。。");
-		// e.printStackTrace();
-		// }
 		beginTime -= System.currentTimeMillis();
-		System.out.println("end");
 	}
 
 	/**
@@ -46,13 +39,12 @@ public class JPThread extends Thread {
 	 * @return 运行时长
 	 */
 	public long getPeriod() {
-		System.out.println(beginTime);
 		synchronized (beginTime) {
 			if (beginTime > 0) {
-				return System.currentTimeMillis() - beginTime;
+				return (System.currentTimeMillis() - beginTime)/1000;
 			}
 		}
-		return -beginTime;
+		return -beginTime/1000;
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -82,6 +74,20 @@ public class JPThread extends Thread {
 		}
 
 		System.out.println("finish");
+	}
+
+	/**
+	 * @return the object
+	 */
+	public Object getObject() {
+		return object;
+	}
+
+	/**
+	 * @param object the object to set
+	 */
+	public void setObject(Object object) {
+		this.object = object;
 	}
 
 }
