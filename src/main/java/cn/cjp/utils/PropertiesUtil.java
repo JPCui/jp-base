@@ -19,9 +19,10 @@ public class PropertiesUtil {
 	private static final Logger logger = Logger.getLogger(PropertiesUtil.class);
 
 	private Map<String, String> params = new HashMap<>();
+	
+	private Properties props = null;
 
 	public PropertiesUtil(String resource) throws IOException {
-		Properties prop = null;
 		String stripped = resource.startsWith("/") ? resource.substring(1) : resource;
 
 		InputStream stream = null;
@@ -39,13 +40,16 @@ public class PropertiesUtil {
 			throw new IOException(resource + " not found");
 		}
 
-		prop = new Properties();
-		prop.load(stream);
+		props = new Properties();
+		props.load(stream);
 
-		for (Object key : prop.keySet()) {
-			params.put(key.toString(), prop.getProperty(key.toString()));
+		for (Object key : props.keySet()) {
+			params.put(key.toString(), props.getProperty(key.toString()));
 		}
-
+	}
+	
+	public Properties getProps() {
+		return props;
 	}
 
 	public String getValue(String key) {

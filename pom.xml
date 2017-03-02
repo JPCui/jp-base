@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>cn.cjp</groupId>
-	<artifactId>cjp-base</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>jp-base</artifactId>
+	<version>v2017.0228</version>
 	<packaging>jar</packaging>
 
-	<name>cjp-base</name>
+	<name>jp-base</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -65,6 +65,11 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1-b08</version>
 		</dependency>
 	</dependencies>
 

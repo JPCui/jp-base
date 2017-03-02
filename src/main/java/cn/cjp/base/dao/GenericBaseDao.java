@@ -12,7 +12,7 @@ public interface GenericBaseDao<T> extends Serializable {
 	 * @deprecated use saveOrUpdate instead
 	 */
 	public void save(T entity);
-	
+
 	public List<Object> query(String hql);
 
 	/**
@@ -44,7 +44,7 @@ public interface GenericBaseDao<T> extends Serializable {
 	 * 
 	 * @param id
 	 */
-	public void delete(long id);
+	public void delete(long id) throws Exception;
 
 	public List<T> findAll();
 
