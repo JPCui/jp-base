@@ -26,15 +26,14 @@
 
 	<repositories>
 		<repository>
-			<id>cth-repos</id>
-			<name>cth Repository</name>
-			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
-		</repository>
-		
-		<repository>
 			<id>jp-base</id>
 			<name>jp-base</name>
 			<url>https://raw.githubusercontent.com/jpcui/jp-base/master/repository</url>
+		</repository>
+		<repository>
+			<id>cth-repos</id>
+			<name>cth Repository</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 
