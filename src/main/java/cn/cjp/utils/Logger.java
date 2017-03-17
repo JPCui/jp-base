@@ -15,7 +15,7 @@ public class Logger {
 
 	private static final String FQCN = Logger.class.getName();
 
-	private static org.apache.log4j.Logger proxy;
+	private org.apache.log4j.Logger proxy;
 
 	public Logger(final String name) {
 		proxy = org.apache.log4j.Logger.getLogger(name);
@@ -28,7 +28,7 @@ public class Logger {
 	public static Logger getLogger(String name) {
 		return new Logger(name);
 	}
-	
+
 	public void log(Level level, Object message) {
 		if (isEnabledFor(level)) {
 			forceLog(level, message);
