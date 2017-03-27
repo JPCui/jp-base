@@ -1,7 +1,5 @@
 package cn.cjp.utils;
 
-import org.apache.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,6 +10,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.output.FileWriterWithEncoding;
+import org.apache.log4j.Logger;
 
 public class FileUtil {
 	/**
@@ -46,8 +45,7 @@ public class FileUtil {
 	 * @param updateFileName
 	 *            如果有重复文件名，是否自动更新文件名
 	 */
-	public static void moveFile(File srcFile, String filePath, File destFile,
-			boolean updateFileName) {
+	public static void moveFile(File srcFile, String filePath, File destFile, boolean updateFileName) {
 		if (updateFileName) {
 			// 首先判断 destFile是否存在
 			String destFileName = destFile.getName();
@@ -57,11 +55,9 @@ public class FileUtil {
 				if (destFile.getName().startsWith("(Copy" + (index) + ")"))
 					continue;
 				if (destFile.getName().startsWith("(Copy" + (index - 1) + ")"))
-					destFile.renameTo(new File(filePath + "(Copy" + (index)
-							+ ")" + destFileName.substring(7)));
+					destFile.renameTo(new File(filePath + "(Copy" + (index) + ")" + destFileName.substring(7)));
 				else
-					destFile.renameTo(new File(filePath + "(Copy" + (index)
-							+ ")" + destFileName));
+					destFile.renameTo(new File(filePath + "(Copy" + (index) + ")" + destFileName));
 			}
 		}
 		// 移动文件
@@ -160,21 +156,24 @@ public class FileUtil {
 	 * @throws IOException
 	 */
 	public static void write(String str, String fileName, boolean append) {
+		File file = new File(fileName);
+		write(str, file, append);
+	}
+
+	public static void write(String str, File file, boolean append) {
 		// 写入文件的url
 		String urlcontent = null;
 		BufferedWriter bw = null;
 		urlcontent = str + '\n';
-		File file = new File(fileName);
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
-				logger.info("can not create file : " + fileName, e);
+				logger.info("can not create file : " + file, e);
 			}
 		}
 		try {
-			bw = new BufferedWriter(new FileWriterWithEncoding(file, "UTF-8",
-					append));
+			bw = new BufferedWriter(new FileWriterWithEncoding(file, "UTF-8", append));
 			bw.write(urlcontent);
 			bw.flush();
 		} catch (IOException e) {
@@ -201,8 +200,7 @@ public class FileUtil {
 	 *            是否追加
 	 * @throws IOException
 	 */
-	public static void write(String str, String fileName, String code,
-			boolean append) throws IOException {
+	public static void write(String str, String fileName, String code, boolean append) throws IOException {
 		BufferedWriter bw = null;
 		str = str + '\n';
 		File file = new File(fileName);
@@ -210,8 +208,7 @@ public class FileUtil {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			bw = new BufferedWriter(new FileWriterWithEncoding(file, code,
-					append));
+			bw = new BufferedWriter(new FileWriterWithEncoding(file, code, append));
 			bw.write(str);
 			bw.flush();
 		} catch (IOException e) {
@@ -222,4 +219,5 @@ public class FileUtil {
 			logger.info("write into " + file.getAbsolutePath() + " : " + str);
 		}
 	}
+
 }

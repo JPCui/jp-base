@@ -1,7 +1,9 @@
 package cn.cjp.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -16,13 +18,22 @@ public class PropertiesUtil {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(PropertiesUtil.class);
+	private static final Logger LOGGER = Logger.getLogger(PropertiesUtil.class);
 
 	private Map<String, String> params = new HashMap<>();
-	
+
 	private Properties props = null;
 
 	public PropertiesUtil(String resource) throws IOException {
+		props = new Properties();
+		props.load(getInputStream(resource));
+
+		for (Object key : props.keySet()) {
+			params.put(key.toString(), props.getProperty(key.toString()));
+		}
+	}
+
+	private static InputStream getInputStream(String resource) throws IOException {
 		String stripped = resource.startsWith("/") ? resource.substring(1) : resource;
 
 		InputStream stream = null;
@@ -39,15 +50,37 @@ public class PropertiesUtil {
 		if (stream == null) {
 			throw new IOException(resource + " not found");
 		}
-
-		props = new Properties();
-		props.load(stream);
-
-		for (Object key : props.keySet()) {
-			params.put(key.toString(), props.getProperty(key.toString()));
-		}
+		return stream;
 	}
-	
+
+	private static File getFile(String resource) {
+		String stripped = resource.startsWith("/") ? resource.substring(1) : resource;
+
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		URL res = classLoader.getResource(stripped);
+		return new File(res.getFile());
+	}
+
+	public static void rewrite(String resource, Map<String, String> params) throws IOException {
+		File file = getFile(resource);
+
+		// 获取已有参数
+		Properties props = new Properties();
+		props.load(getInputStream(resource));
+		for (Object key : props.keySet()) {
+			if (!params.containsKey(key)) {
+				params.put(key.toString(), props.getProperty(key.toString()));
+			}
+		}
+
+		StringBuilder content = new StringBuilder();
+		for (String key : params.keySet()) {
+			content.append(String.format("%s=%s\r\n", key, params.get(key)));
+		}
+
+		FileUtil.write(content.toString(), file, false);
+	}
+
 	public Properties getProps() {
 		return props;
 	}
@@ -73,24 +106,15 @@ public class PropertiesUtil {
 	}
 
 	public static void main(String[] args) throws IOException {
-		for (int i = 0; i < 100; i++) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					PropertiesUtil propertiesUtil;
-					try {
-						propertiesUtil = new PropertiesUtil("redis.properties");
-						String host = propertiesUtil.getValue("host");
-						if (logger.isInfoEnabled()) {
-							logger.info("main(String[]) - String host=" + host); //$NON-NLS-1$
-						}
-						System.out.println(propertiesUtil.params);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}).start();
-		}
+		PropertiesUtil util = new PropertiesUtil("test.properties");
+		System.out.println(util.getParams());
+
+		LOGGER.info(getFile("test.properties"));
+
+		Map<String, String> params = new HashMap<>();
+		params.put("b", "22");
+		params.put("c", "3");
+		rewrite("test.properties", params);
 
 	}
 }

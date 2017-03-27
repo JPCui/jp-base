@@ -15,7 +15,7 @@ rem echo.
 cd %~dp0
 cd..
 
-call mvn clean compile package install deploy -Dmaven.test.skip=true
+call mvn clean compile package install -Dmaven.test.skip=true
 
 cd bin
 pause
