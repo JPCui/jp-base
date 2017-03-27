@@ -53,6 +53,12 @@ public class Logger {
 		}
 	}
 
+	public void warn(Object message, Throwable t) {
+		if (isEnabledFor(Level.WARN)) {
+			forceLog(Level.WARN, message, t);
+		}
+	}
+
 	public void info(Object message) {
 		if (isInfoEnabled()) {
 			forceLog(Level.INFO, message);
