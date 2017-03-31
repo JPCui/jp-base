@@ -4,7 +4,7 @@
 
 	<groupId>cn.cjp</groupId>
 	<artifactId>jp-base</artifactId>
-	<version>v1.0.1</version>
+	<version>v1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>jp-base</name>
