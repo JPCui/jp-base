@@ -66,9 +66,7 @@ public class Logger {
 	}
 
 	public void debug(Object message) {
-		if (isDebugEnabled()) {
-			forceLog(Level.DEBUG, message);
-		}
+		forceLog(Level.DEBUG, message);
 	}
 
 	private void forceLog(Level level, Object message) {
