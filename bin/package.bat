@@ -1,6 +1,6 @@
 @echo off
 rem /**
-rem  * Copyright &copy; 2012-2016 51cth.com All rights reserved.
+rem  * Copyright &copy; 2016-2017 https://github.com/jpcui All rights reserved.
 rem  *
 rem  * Author: Cui
 rem  */
