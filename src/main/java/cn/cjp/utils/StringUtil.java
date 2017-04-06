@@ -17,7 +17,7 @@ public class StringUtil {
 
 	public static final String EMOJI_REGEX = "[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]";
 
-	public static final Object LINE_SEPARATOR = "\r\n";
+	public static final String LINE_SEPARATOR = "\r\n";
 
 	public static boolean containsEmoji(String source) {
 		if (StringUtil.isEmpty(source)) {
