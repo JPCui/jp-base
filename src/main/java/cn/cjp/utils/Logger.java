@@ -60,9 +60,7 @@ public class Logger {
 	}
 
 	public void info(Object message) {
-		if (isInfoEnabled()) {
-			forceLog(Level.INFO, message);
-		}
+		forceLog(Level.INFO, message);
 	}
 
 	public void debug(Object message) {
