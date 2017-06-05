@@ -1,5 +1,7 @@
 package cn.cjp.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,6 +50,39 @@ public class StringUtil {
 		} else {
 			return s;
 		}
+	}
+	
+	/**
+	 * 去除 UTF8MB4 字符
+	 * @param text
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String filterUtf8mb4(String text) throws UnsupportedEncodingException {
+		byte[] bytes = text.getBytes("UTF-8");
+		ByteBuffer buffer = ByteBuffer.allocate(bytes.length);
+		int i = 0;
+		while (i < bytes.length) {
+			short b = bytes[i];
+			if (b > 0) {
+				buffer.put(bytes[i++]);
+				continue;
+			}
+			b += 256;
+			if ((b ^ 0xC0) >> 4 == 0) {
+				buffer.put(bytes, i, 2);
+				i += 2;
+			} else if ((b ^ 0xE0) >> 4 == 0) {
+				buffer.put(bytes, i, 3);
+				i += 3;
+			} else if ((b ^ 0xF0) >> 4 == 0) {
+				i += 4;
+			} else {
+				i++;
+			}
+		}
+		buffer.flip();
+		return new String(buffer.array(), "utf-8");
 	}
 
 	public static String combine(Object[] args, String split) {
