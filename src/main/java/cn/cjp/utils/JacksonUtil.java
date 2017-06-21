@@ -25,6 +25,8 @@ import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
 import org.codehaus.jackson.map.type.TypeFactory;
 import org.codehaus.jackson.type.JavaType;
 
+import cn.cjp.base.model.BaseEntityModel;
+
 public class JacksonUtil {
 
 	private static Logger logger = Logger.getLogger(JacksonUtil.class);
@@ -38,8 +40,11 @@ public class JacksonUtil {
 	public static void main(String[] args)
 			throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, JsonGenerationException, JsonMappingException, IOException {
-		
-		System.out.println("run...");
+
+		BaseEntityModel m = new BaseEntityModel();
+		System.out.println(toMap(m));
+		System.out.println(fromMapToObj(toMap(m), BaseEntityModel.class));
+
 	}
 
 	static {
@@ -305,6 +310,18 @@ public class JacksonUtil {
 		try {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			objectMapper.writeValue(bos, mapList);
+			return objectMapper.readValue(bos.toByteArray(), javaType);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			throw new RuntimeException("解析json错误");
+		}
+	}
+
+	public static <T> T fromMapToObj(Map<?, ?> map, Class<T> objClass) {
+		JavaType javaType = objectMapper.getTypeFactory().constructType(Map.class);
+		try {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			objectMapper.writeValue(bos, map);
 			return objectMapper.readValue(bos.toByteArray(), javaType);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
