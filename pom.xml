@@ -4,7 +4,7 @@
 
 	<groupId>cn.cjp</groupId>
 	<artifactId>jp-base</artifactId>
-	<version>v1.0.1</version>
+	<version>v1.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>jp-base</name>
@@ -29,7 +29,7 @@
 			<name>Ali Repository</name>
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
-		
+
 		<repository>
 			<id>jp-base</id>
 			<name>jp-base</name>
@@ -45,6 +45,13 @@
 	</distributionManagement>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
