@@ -3,11 +3,12 @@
   <groupId>cn.cjp</groupId>
   <artifactId>jp-base</artifactId>
   <versioning>
-    <release>v1.1.0</release>
+    <release>v1.1.1</release>
     <versions>
       <version>v1.0.1</version>
       <version>v1.1.0</version>
+      <version>v1.1.1</version>
     </versions>
-    <lastUpdated>20170702083431</lastUpdated>
+    <lastUpdated>20170717120032</lastUpdated>
   </versioning>
 </metadata>

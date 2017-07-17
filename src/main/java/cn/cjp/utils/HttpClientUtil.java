@@ -57,7 +57,7 @@ public class HttpClientUtil {
 		for (String key : params.keySet()) {
 			nvs.add(new BasicNameValuePair(key, params.get(key)));
 		}
-		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvs, Charset.defaultCharset());
+		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvs, "UTF-8");
 		post.setEntity(entity);
 
 		CloseableHttpResponse response = httpClient.execute(post);
