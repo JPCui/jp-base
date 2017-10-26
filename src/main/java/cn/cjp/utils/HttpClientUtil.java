@@ -1,17 +1,16 @@
 package cn.cjp.utils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -24,8 +23,6 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpClientUtil {
 
-	static String loginUrl = "http://local.betago2016.com:8080/beta-core/user/login";
-
 	CloseableHttpClient httpClient;
 
 	public HttpClientUtil() {
@@ -34,8 +31,10 @@ public class HttpClientUtil {
 		builder.setConnectionManager(manager);
 		// builder.setConnectionReuseStrategy(ConnectionReuseStrategy)
 
-		// HttpHost proxy = new HttpHost("localhost", 8888);
+		// HttpHost proxy = new HttpHost("160.16.94.228", 80);
 		// builder.setProxy(proxy);
+		builder.setDefaultRequestConfig(RequestConfig.custom().setConnectTimeout(30_000)
+				.setConnectionRequestTimeout(30_000).setSocketTimeout(30_000).build());
 		httpClient = builder.build();
 	}
 
@@ -65,24 +64,6 @@ public class HttpClientUtil {
 	}
 
 	public void test() throws IOException, URISyntaxException {
-
-		Map<String, String> params = new HashMap<>();
-		params.put("userid", "103");
-		CloseableHttpResponse response = post(loginUrl, params);
-		System.out.println(response.getStatusLine());
-		InputStream is = response.getEntity().getContent();
-		String content = StreamUtil.copyToString(is, Charset.defaultCharset());
-		System.out.println(content);
-
-		params.put("content", "哈哈");
-		params.put("userid", "103");
-		params.put("orderid", "568");
-		params.put("sessionid", "1498804810u103");
-		response = post("http://local.betago2016.com:8080/beta-core/chat", params);
-		System.out.println(response.getStatusLine());
-		is = response.getEntity().getContent();
-		content = StreamUtil.copyToString(is, Charset.defaultCharset());
-		System.out.println(content);
 
 	}
 

@@ -38,7 +38,7 @@ public class Cache {
 	public static final int ONE_HOUR = 3600;
 
 	/**
-	 * 超时清楚
+	 * 超时清除
 	 */
 	@Scheduled(fixedDelay = 60_000)
 	public void clearTask() {

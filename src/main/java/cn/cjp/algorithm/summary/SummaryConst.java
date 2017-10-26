@@ -1,4 +1,4 @@
-package cn.cjp.summary;
+package cn.cjp.algorithm.summary;
 
 /**
  * 文摘中权重的设置

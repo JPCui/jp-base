@@ -1,4 +1,4 @@
-package cn.cjp.summary;
+package cn.cjp.algorithm.summary;
 
 import java.util.ArrayList;
 import java.util.Collections;

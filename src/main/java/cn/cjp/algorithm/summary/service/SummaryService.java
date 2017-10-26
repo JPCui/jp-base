@@ -1,9 +1,9 @@
-package cn.cjp.summary.service;
+package cn.cjp.algorithm.summary.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cjp.summary.Document;
+import cn.cjp.algorithm.summary.Document;
 
 public class SummaryService {
 	

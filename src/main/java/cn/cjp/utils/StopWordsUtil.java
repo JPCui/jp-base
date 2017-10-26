@@ -15,7 +15,7 @@ import org.ansj.domain.Term;
 import org.ansj.splitWord.analysis.NlpAnalysis;
 import org.apache.commons.lang.StringUtils;
 
-import cn.cjp.summary.Document.Word;
+import cn.cjp.algorithm.summary.Document.Word;
 
 /**
  * 停用词工具类（分词，去停用词，判断停用词）
