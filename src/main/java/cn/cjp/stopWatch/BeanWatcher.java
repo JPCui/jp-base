@@ -44,14 +44,14 @@ public class BeanWatcher {
     public BeanWatcher() {
     }
 
-    @Pointcut(value = "execution(public * com.beta.domain.service..*.*(..))")
+    @Pointcut(value = "execution(public * xxx.service..*.*(..))")
     public void core() {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.info("core");
         }
     }
 
-    @Pointcut(value = "execution(public * com.beta.domain.dao..*.*(..))")
+    @Pointcut(value = "execution(public * xxx.dao..*.*(..))")
     public void others() {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.info("others");
