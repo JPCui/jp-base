@@ -1,4 +1,4 @@
-package cn.cjp.cache;
+package cn.cjp.core.cache;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

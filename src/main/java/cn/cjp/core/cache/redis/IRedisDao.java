@@ -1,4 +1,4 @@
-package cn.cjp.cache;
+package cn.cjp.core.cache.redis;
 
 import java.io.Serializable;
 import java.util.Set;

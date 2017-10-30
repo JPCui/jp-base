@@ -1,4 +1,4 @@
-package cn.cjp.cache;
+package cn.cjp.core.cache;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,37 +8,38 @@ import java.util.Set;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-import org.springframework.stereotype.Component;
 
+import cn.cjp.core.cache.memory.MemoryCache;
 import cn.cjp.utils.Logger;
-import cn.cjp.utils.SerializeHelper;
 import cn.cjp.utils.StringUtil;
 
-@Component
-public class RedisCacheManager {
+public class CacheManager {
 
-    static final Logger LOGGER = Logger.getLogger(RedisCacheManager.class);
+    static final Logger LOGGER = Logger.getLogger(CacheManager.class);
 
     static final String GROUP_FORMAT = "G:%s";
 
-    @Autowired
-    RedisTemplateService redisTemplateService;
+    Cache cache;
+
+    public CacheManager() {
+        cache = new MemoryCache();
+    }
+
+    public CacheManager(Cache cache) {
+        this.cache = cache;
+    }
 
     public void saveCacheGroup(EvaluationContext ctx, Cacheable cacheable, String cacheKey) {
         String[] groups = cacheable.group();
         for (String group : groups) {
             group = String.format(GROUP_FORMAT, group);
             String groupCacheKey = this.getCacheKey(ctx, group, cacheable.args());
-            this.redisTemplateService.sadd(groupCacheKey, cacheKey);
-            LOGGER.debug(String.format("save cache group : {}, members : {}", groupCacheKey, cacheKey));
+            this.cache.sadd(groupCacheKey, cacheKey);
+            LOGGER.debug(String.format("save cache -> group : %s, members : %s", groupCacheKey, cacheKey));
         }
     }
 
@@ -52,34 +53,51 @@ public class RedisCacheManager {
     }
 
     public void delByCacheGroup(EvaluationContext ctx, String groupCacheKey) {
-        byte[] k = this.redisTemplateService.getDomainKey(groupCacheKey).getBytes();
-        this.redisTemplateService.execute(new RedisCallback<Object>() {
-            public Long doInRedis(RedisConnection conn) throws DataAccessException {
-                // 获取所有缓存的 key
-                Set<byte[]> vs = conn.sMembers(k);
 
-                if (!vs.isEmpty()) {
+        this.cache.execute(new CacheCallback<Object>() {
+
+            @Override
+            public Long doIntern(Cache cache) {
+                List<String> keys = cache.smembers(String.class, cache.getDomainKey(groupCacheKey));
+                if (!keys.isEmpty()) {
                     List<String> vs2 = new ArrayList<>();
-                    vs.forEach(v -> {
-                        vs2.add(redisTemplateService.getDomainKey((String) SerializeHelper.deserialize(v)));
+                    keys.forEach(v -> {
+                        vs2.add(cache.getDomainKey(v));
                     });
-                    LOGGER.debug(String.format("del cache : {}", vs2.toString()));
-                    return conn.del(vs2.stream().map(String::getBytes).toArray(byte[][]::new));
+                    LOGGER.debug(String.format("del cache : %s", vs2.toString()));
+                    return cache.delete(vs2);
                 }
                 return 0L;
             }
         });
-        LOGGER.debug(String.format("del cache group : {}", groupCacheKey));
+
+        this.cache.execute(new CacheCallback<Long>() {
+
+            @Override
+            public Long doIntern(Cache cache) {
+                List<String> vs = cache.smembers(String.class, groupCacheKey);
+                if (!vs.isEmpty()) {
+                    List<String> vs2 = new ArrayList<>();
+                    vs.forEach(v -> {
+                        vs2.add(v);
+                    });
+                    LOGGER.debug(String.format("del cache : %s", vs2.toString()));
+                    return cache.delete(vs2);
+                }
+                return 0L;
+            }
+        });
+
+        LOGGER.debug(String.format("del cache group : %s", groupCacheKey));
     }
 
     public void saveCache(String key, Object value, long expireTime) {
-        LOGGER.debug(String.format("save cache : {}", key));
-        this.redisTemplateService.set(key, value, expireTime);
+        LOGGER.debug(String.format("save cache : %s", key));
+        this.cache.set(key, value, expireTime);
     }
 
-    public Object getCache(String key) {
-        LOGGER.debug(String.format("get cache : {}", key));
-        Object value = this.redisTemplateService.get(key);
+    public <T> T getCache(Class<T> returnType, String key) {
+        T value = this.cache.get(returnType, key);
         return value;
     }
 
@@ -88,19 +106,28 @@ public class RedisCacheManager {
         // 按key删除
         String[] keys = cacheEvict.key();
         for (String key : keys) {
-            String k = null;
-            if (!StringUtil.isEmpty(k)) {
+            if (!StringUtil.isEmpty(key)) {
                 key = this.getCacheKey(ctx, key, cacheEvict.args());
-                this.redisTemplateService.delete(k);
-                LOGGER.debug(String.format("del cache : {}", key));
+                this.cache.delete(key);
+                LOGGER.debug(String.format("del cache : %s", key));
             }
         }
 
         // 按keyPrefix删除
         Arrays.asList(cacheEvict.keyPrefix()).forEach(keyPrefix -> {
             String k = this.getCacheKey(ctx, keyPrefix, new String[0]);
-            this.redisTemplateService.deleteByPrefix(k);
-            LOGGER.debug(String.format("del cache : {}", k));
+            this.cache.execute(new CacheCallback<Object>() {
+
+                @Override
+                public Object doIntern(Cache cache) {
+                    Set<String> keys = cache.keys(k);
+                    if (!keys.isEmpty()) {
+                        cache.delete(keys);
+                    }
+                    return null;
+                }
+            });
+            LOGGER.debug(String.format("del cache : %s", k));
         });
 
         // 按group删除

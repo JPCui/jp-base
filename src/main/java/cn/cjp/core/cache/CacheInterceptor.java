@@ -1,11 +1,11 @@
-package cn.cjp.cache;
+package cn.cjp.core.cache;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.expression.EvaluationContext;
-import org.springframework.stereotype.Component;
 
 import cn.cjp.utils.Logger;
 
@@ -22,47 +22,66 @@ import cn.cjp.utils.Logger;
  * @author sucre
  */
 @Aspect
-@Component
-public class RedisCacheInterceptor {
+public class CacheInterceptor {
 
-    static final Logger LOGGER = Logger.getLogger(RedisCacheInterceptor.class);
+    static final Logger LOGGER = Logger.getLogger(CacheInterceptor.class);
 
-    @Autowired
-    RedisTemplateService redisTemplateService;
+    CacheManager cacheManager;
 
-    @Autowired
-    RedisCacheManager redisCacheManager;
+    public CacheInterceptor() {
+        this.cacheManager = new CacheManager();
+    }
 
+    public CacheInterceptor(CacheManager cacheManager) {
+        this.cacheManager = cacheManager;
+    }
+
+    /**
+     * 
+     * @param joinPoint
+     * @param cacheable
+     * @return
+     * @throws Throwable
+     * @see cn.cjp.core.cache.Cacheable
+     */
     @Around("@annotation(cacheable)")
     public Object aroundCacheable(ProceedingJoinPoint joinPoint, Cacheable cacheable) throws Throwable {
-        EvaluationContext ctx = redisCacheManager.getArgValues(joinPoint);
+        EvaluationContext ctx = cacheManager.getArgValues(joinPoint);
 
         String key = cacheable.key();
         long expireTime = cacheable.expireTime();
 
-        String cacheKey = redisCacheManager.getCacheKey(ctx, key, cacheable.args());
+        String cacheKey = cacheManager.getCacheKey(ctx, key, cacheable.args());
 
-        Object cacheObj = redisCacheManager.getCache(cacheKey);
+        Signature signature = joinPoint.getSignature();
+        MethodSignature methodSignature = (MethodSignature) signature;
+        Class<?> returnType = methodSignature.getReturnType();
+
+        Object cacheObj = cacheManager.getCache(returnType, cacheKey);
         if (cacheObj == null) {
+            LOGGER.debug(String.format("miss cache: %s", cacheKey));
             cacheObj = joinPoint.proceed();
-            redisCacheManager.saveCache(cacheKey, cacheObj, expireTime);
-            redisCacheManager.saveCacheGroup(ctx, cacheable, cacheKey);
+            cacheManager.saveCache(cacheKey, cacheObj, expireTime);
+            cacheManager.saveCacheGroup(ctx, cacheable, cacheKey);
+        } else {
+            LOGGER.debug(String.format("get cache: %s, value: %s", cacheKey, cacheObj));
         }
+
         return cacheObj;
     }
 
     @Around("@annotation(cacheEvict)")
     public Object aroundCacheEvict(ProceedingJoinPoint joinPoint, CacheEvict cacheEvict) throws Throwable {
-        EvaluationContext ctx = redisCacheManager.getArgValues(joinPoint);
+        EvaluationContext ctx = cacheManager.getArgValues(joinPoint);
 
         Object ret = null;
         boolean beforeInvocation = cacheEvict.beforeInvocation();
         if (beforeInvocation) {
-            redisCacheManager.clearCache(ctx, cacheEvict);
+            cacheManager.clearCache(ctx, cacheEvict);
             ret = joinPoint.proceed();
         } else {
             ret = joinPoint.proceed();
-            redisCacheManager.clearCache(ctx, cacheEvict);
+            cacheManager.clearCache(ctx, cacheEvict);
         }
 
         return ret;

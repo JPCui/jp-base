@@ -1,4 +1,4 @@
-package cn.cjp.cache;
+package cn.cjp.core.cache.redis;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -8,11 +8,9 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import cn.cjp.utils.SerializeHelper;
 
-@Service
 public class RedisService {
 
     @Value("${redis.expires:1800}")

@@ -1,4 +1,7 @@
-package cn.cjp.cache;
+package cn.cjp.core.cache.redis;
+
+import java.io.Serializable;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,16 +11,12 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
-import java.util.Set;
+import cn.cjp.core.cache.redis.IRedisDao;
 
-@Service
 public class RedisDao implements IRedisDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
     private RedisTemplate<Serializable, Serializable> redisTemplate;
 
     private long defaultExpireTime = 600;
@@ -184,7 +183,7 @@ public class RedisDao implements IRedisDao {
         return set(key, value, defaultExpireTime);
     }
 
-    public byte[] set(final byte[] key, final byte[] value,final long expireTime) {
+    public byte[] set(final byte[] key, final byte[] value, final long expireTime) {
         try {
             redisTemplate.execute((RedisConnection conn) -> {
                 conn.set(key, value);
@@ -197,7 +196,7 @@ public class RedisDao implements IRedisDao {
         return value;
     }
 
-    public Set<byte[]> keys(final String pattern){
+    public Set<byte[]> keys(final String pattern) {
         try {
             return redisTemplate.execute((RedisConnection conn) -> {
                 byte[] k = redisTemplate.getStringSerializer().serialize(pattern);
