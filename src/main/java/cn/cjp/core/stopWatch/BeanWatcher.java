@@ -1,10 +1,11 @@
-package cn.cjp.stopWatch;
+package cn.cjp.core.stopWatch;
 
 import java.util.Collection;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
@@ -37,24 +38,19 @@ import cn.cjp.utils.Stopwatchs.Task;
  * @author JinPeng Cui
  * @see EnableAspectJAutoProxy 如何在SpringBoot中使用 aspect
  */
+@Aspect
 public class BeanWatcher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BeanWatcher.class);
 
     public BeanWatcher() {
+        LOGGER.debug("init");
     }
 
-    @Pointcut(value = "execution(public * xxx.service..*.*(..))")
+    @Pointcut(value = "execution(public * cn.cjp.core.service..*.*(..))")
     public void core() {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.info("core");
-        }
-    }
-
-    @Pointcut(value = "execution(public * xxx.dao..*.*(..))")
-    public void others() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.info("others");
         }
     }
 
@@ -63,7 +59,7 @@ public class BeanWatcher {
      *      && args(param)", argNames = "param")
      * @param point
      */
-    @Before(value = "core() || others()")
+    @Before(value = "core()")
     public void before(JoinPoint point) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.info("Watch before: " + point.getSignature().toString());
@@ -74,7 +70,7 @@ public class BeanWatcher {
         Stopwatchs.start(task);
     }
 
-    @AfterReturning(value = "core() || others()", returning = "returnValue")
+    @AfterReturning(value = "core()", returning = "returnValue")
     public void after(JoinPoint point, Object returnValue) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.info("Wacth after: " + point.getSignature().toString());

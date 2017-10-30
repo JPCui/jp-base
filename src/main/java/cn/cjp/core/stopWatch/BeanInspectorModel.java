@@ -1,4 +1,4 @@
-package cn.cjp.stopWatch;
+package cn.cjp.core.stopWatch;
 
 import java.util.Date;
 
