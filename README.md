@@ -9,7 +9,7 @@ jp-base
 
 ## 调用栈
 
-[StopWatch](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/stopWatch)
+[StopWatch](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/core/stopWatch/README.md)
 
 ## 布隆过滤器（Redis）
 
@@ -17,9 +17,9 @@ jp-base
 
 [bloomfilter](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/algorithm/bloomfilter)
 
-## 仿 SpringCache
+## 仿 SpringCache 的业务缓存方案
 
-[RedisCacheManager](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/cache)
+[RedisCacheManager](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/core/cache/README.md)
 
 # Maven
 
