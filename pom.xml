@@ -4,7 +4,7 @@
 
 	<groupId>cn.cjp</groupId>
 	<artifactId>jp-base</artifactId>
-	<version>v1.1.1</version>
+	<version>v2017.1030</version>
 	<packaging>jar</packaging>
 
 	<name>jp-base</name>
@@ -204,6 +204,13 @@
 			<artifactId>guava</artifactId>
 			<version>19.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.carrot2</groupId>
+			<artifactId>carrot2-core</artifactId>
+			<version>3.9.4</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -245,8 +252,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>

@@ -5,17 +5,14 @@ import java.util.Collection;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import cn.cjp.utils.Stopwatchs;
-import cn.cjp.utils.Stopwatchs.Stopwatch;
-import cn.cjp.utils.Stopwatchs.Task;
+import cn.cjp.core.stopWatch.Stopwatchs.Stopwatch;
+import cn.cjp.core.stopWatch.Stopwatchs.Task;
 
 /**
  * 实体调用检测拦截器. <br>
@@ -38,8 +35,7 @@ import cn.cjp.utils.Stopwatchs.Task;
  * @author JinPeng Cui
  * @see EnableAspectJAutoProxy 如何在SpringBoot中使用 aspect
  */
-@Aspect
-public class BeanWatcher {
+public abstract class BeanWatcher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BeanWatcher.class);
 
@@ -47,12 +43,8 @@ public class BeanWatcher {
         LOGGER.debug("init");
     }
 
-    @Pointcut(value = "execution(public * cn.cjp.core.service..*.*(..))")
-    public void core() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.info("core");
-        }
-    }
+    // @Pointcut(value = "execution(public * cn.cjp.core.service..*.*(..))")
+    abstract public void core();
 
     /**
      * @use @Pointcut(value= "execution(* your_package.*.sayAdvisorBefore(..))
