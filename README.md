@@ -7,6 +7,10 @@ jp-base
 
 [JacksonUtil](https://github.com/JPCui/jp-base/blob/master/src/main/java/cn/cjp/utils/JacksonUtil.java)
 
+## 分布式锁
+
+[DistributeLock](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/core/lock/DistributeLock.java)
+
 ## 调用栈
 
 [StopWatch](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/core/stopWatch/README.md)
@@ -19,7 +23,7 @@ jp-base
 
 ## 仿 SpringCache 的业务缓存方案
 
-[RedisCacheManager](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/core/cache/README.md)
+[RedisCacheManager](https://github.com/JPCui/jp-base/tree/master/src/main/java/cn/cjp/core/cache)
 
 # Maven
 

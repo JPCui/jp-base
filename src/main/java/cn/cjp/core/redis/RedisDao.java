@@ -1,18 +1,15 @@
-package cn.cjp.core.cache.redis;
+package cn.cjp.core.redis;
 
 import java.io.Serializable;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
-
-import cn.cjp.core.cache.redis.IRedisDao;
 
 public class RedisDao implements IRedisDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -179,6 +176,23 @@ public class RedisDao implements IRedisDao {
         }
     }
 
+    public String get(String key) {
+        try {
+            return redisTemplate.execute((RedisConnection conn) -> {
+                byte[] k = redisTemplate.getStringSerializer().serialize(key);
+                if (conn.exists(k)) {
+                    byte[] v = conn.get(k);
+                    String value = redisTemplate.getStringSerializer().deserialize(v);
+                    return value;
+                }
+                return null;
+            });
+        } catch (Exception ex) {
+            logger.error("Redis读取数据失败:", ex);
+            return null;
+        }
+    }
+
     public byte[] set(final byte[] key, final byte[] value) {
         return set(key, value, defaultExpireTime);
     }
@@ -211,5 +225,49 @@ public class RedisDao implements IRedisDao {
         }
 
         return null;
+    }
+
+    @Override
+    public int setnx(String key, String value) {
+        return redisTemplate.execute((RedisConnection conn) -> {
+            byte[] k = redisTemplate.getStringSerializer().serialize(key);
+            byte[] v = redisTemplate.getStringSerializer().serialize(value);
+            return conn.setNX(k, v) ? 1 : 0;
+        });
+    }
+
+    @Override
+    public int expire(String key, int timeout) {
+        return redisTemplate.execute((RedisConnection conn) -> {
+            byte[] k = redisTemplate.getStringSerializer().serialize(key);
+            return conn.expire(k, timeout) ? 1 : 0;
+        });
+    }
+
+    @Override
+    public int ttl(String key) {
+        return redisTemplate.execute((RedisConnection conn) -> {
+            byte[] k = redisTemplate.getStringSerializer().serialize(key);
+            return conn.ttl(k).intValue();
+        });
+    }
+
+    @Override
+    public int del(String key) {
+        return redisTemplate.execute((RedisConnection conn) -> {
+            byte[] k = redisTemplate.getStringSerializer().serialize(key);
+            return conn.del(k).intValue();
+        });
+    }
+
+    @Override
+    public String getset(String key, String value) {
+        return redisTemplate.execute((RedisConnection conn) -> {
+            byte[] k = redisTemplate.getStringSerializer().serialize(key);
+            byte[] v = redisTemplate.getStringSerializer().serialize(value);
+            byte[] r = conn.getSet(k, v);
+            String result = redisTemplate.getStringSerializer().deserialize(r);
+            return result;
+        });
     }
 }

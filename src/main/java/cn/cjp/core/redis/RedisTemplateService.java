@@ -1,4 +1,4 @@
-package cn.cjp.core.cache.redis;
+package cn.cjp.core.redis;
 
 import java.util.ArrayList;
 import java.util.Collection;
