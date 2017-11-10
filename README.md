@@ -1,5 +1,6 @@
-jp-base
-========
+# jp-base
+
+[![HitCount](http://hits.dwyl.io/jpcui/jp-base.svg)](http://hits.dwyl.io/jpcui/jp-base)
 
 # 一些有用的工具
 
