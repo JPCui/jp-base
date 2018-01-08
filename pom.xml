@@ -134,7 +134,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			</dependency>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -248,6 +248,28 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>2.16</version>
+					<executions>
+						<execution>
+							<id>checkstyle</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+							<configuration>
+								<failOnViolation>true</failOnViolation>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
 	</build>
 
 	<dependencyManagement>
@@ -262,6 +284,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 
 
 </project>
