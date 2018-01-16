@@ -6,7 +6,7 @@ rem  * Author: Cui
 rem  */
 title %cd%
 echo.
-echo [пео╒] ╢Р╟Э  - package
+echo [О©╫О©╫о╒] О©╫О©╫О©╫  - package
 echo.
 
 rem pause
@@ -15,7 +15,7 @@ rem echo.
 cd %~dp0
 cd..
 
-call mvn clean compile package install deploy -Dmaven.test.skip=true
+call mvn clean compile package deploy -Dmaven.test.skip=true
 
 cd bin
 pause

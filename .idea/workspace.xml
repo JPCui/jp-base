@@ -2,27 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d688876-f9b0-483b-b5b8-3cca3a5bcbe2" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/jp-base.iml" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/maven-metadata.xml" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/maven-metadata.xml" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/maven-metadata.xml.md5" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/maven-metadata.xml.md5" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/maven-metadata.xml.sha1" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/maven-metadata.xml.sha1" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030-sources.jar" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030-sources.jar" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030-sources.jar.md5" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030-sources.jar.md5" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030-sources.jar.sha1" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030-sources.jar.sha1" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.jar" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.jar" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.jar.md5" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.jar.md5" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.jar.sha1" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.jar.sha1" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.pom" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.pom" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.pom.md5" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.pom.md5" />
-      <change beforePath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.pom.sha1" afterPath="$PROJECT_DIR$/repository/cn/cjp/jp-base/v2017.1030/jp-base-v2017.1030.pom.sha1" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/cjp/BaseTest.java" afterPath="$PROJECT_DIR$/src/test/java/cn/cjp/BaseTest.java" />
+      <change beforePath="$PROJECT_DIR$/bin/package.bat" afterPath="$PROJECT_DIR$/bin/package.bat" />
     </list>
     <ignored path="$PROJECT_DIR$/target/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,6 +27,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/bin/package.bat" />
       </list>
     </option>
   </component>
@@ -294,14 +275,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bin/package.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -314,6 +287,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="774">
           <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/package.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="17" column="31" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
           <folding />
         </state>
       </provider>
