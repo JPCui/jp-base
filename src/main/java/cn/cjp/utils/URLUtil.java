@@ -91,7 +91,7 @@ public class URLUtil {
 
 	public static void main(String[] args) throws MalformedURLException {
 		String url = "http://m.baidu.com:80/asd/aaa";
-		String other = "other/asd";
+		String other = "###";
 
 		System.out.println(relative(url, other));
 	}
