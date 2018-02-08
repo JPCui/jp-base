@@ -4,7 +4,7 @@
 
 	<groupId>cn.cjp</groupId>
 	<artifactId>jp-base</artifactId>
-	<version>v2017.1030</version>
+	<version>v2018.0208</version>
 	<packaging>jar</packaging>
 
 	<name>jp-base</name>
@@ -49,6 +49,11 @@
 	</distributionManagement>
 
 	<dependencies>
+	
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
