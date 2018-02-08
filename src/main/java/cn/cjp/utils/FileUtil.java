@@ -103,6 +103,32 @@ public class FileUtil {
 		return contents;
 	}
 
+	public static String readLine(String fileName) {
+		File dirFile = new File(fileName);
+		return readLine(dirFile);
+	}
+
+	public static String readLine(File dirFile) {
+		if (!dirFile.exists()) {
+			return "";
+		}
+		StringBuilder contents = new StringBuilder();
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(dirFile));
+			String s = "";
+			while ((s = br.readLine()) != null) {
+				s.replace(" ", "");
+				if (s.trim().equals(""))
+					continue;
+				contents.append(s);
+			}
+			br.close();
+		} catch (Exception e) {
+		}
+		return contents.toString();
+	}
+
 	/**
 	 * 按行读取文件，忽略空行
 	 * 
@@ -218,6 +244,10 @@ public class FileUtil {
 				bw.close();
 			logger.info("write into " + file.getAbsolutePath() + " : " + str);
 		}
+	}
+
+	public static void delete(File file) {
+		file.deleteOnExit();
 	}
 
 }
