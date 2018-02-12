@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d688876-f9b0-483b-b5b8-3cca3a5bcbe2" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/cn/cjp/utils/JacksonUtilTest.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/jp-base.iml" afterPath="$PROJECT_DIR$/jp-base.iml" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log" afterPath="$PROJECT_DIR$/logs/debug.log" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log" afterPath="$PROJECT_DIR$/logs/error.log" />
-      <change beforePath="$PROJECT_DIR$/logs/warn.log" afterPath="$PROJECT_DIR$/logs/warn.log" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cjp/base/model/BaseEntityModel.java" afterPath="$PROJECT_DIR$/src/main/java/cn/cjp/base/model/BaseEntityModel.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cjp/base/model/BaseModel.java" afterPath="$PROJECT_DIR$/src/main/java/cn/cjp/base/model/BaseModel.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cjp/core/cache/Cache.java" afterPath="$PROJECT_DIR$/src/main/java/cn/cjp/core/cache/Cache.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cjp/core/cache/CacheManager.java" afterPath="$PROJECT_DIR$/src/main/java/cn/cjp/core/cache/CacheManager.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cjp/core/cache/file/FileCache.java" afterPath="$PROJECT_DIR$/src/main/java/cn/cjp/core/cache/file/FileCache.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cjp/core/cache/memory/MemoryCache.java" afterPath="$PROJECT_DIR$/src/main/java/cn/cjp/core/cache/memory/MemoryCache.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cjp/core/redis/RedisTemplateService.java" afterPath="$PROJECT_DIR$/src/main/java/cn/cjp/core/redis/RedisTemplateService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cjp/utils/JacksonUtil.java" afterPath="$PROJECT_DIR$/src/main/java/cn/cjp/utils/JacksonUtil.java" />
-    </list>
+    <list default="true" id="4d688876-f9b0-483b-b5b8-3cca3a5bcbe2" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -381,7 +362,7 @@
       <updated>1516070364312</updated>
       <workItem from="1518231448061" duration="89000" />
       <workItem from="1518330156096" duration="407000" />
-      <workItem from="1518331426733" duration="5815000" />
+      <workItem from="1518331426733" duration="5950000" />
     </task>
     <servers />
   </component>
@@ -418,7 +399,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6311000" />
+    <option name="totallyTimeSpent" value="6446000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -711,8 +692,8 @@
         <state relative-caret-position="265">
           <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding>
-            <element signature="e#1706#1707#0" expanded="true" />
-            <element signature="e#1746#1747#0" expanded="true" />
+            <element signature="e#1675#1676#0" expanded="true" />
+            <element signature="e#1715#1716#0" expanded="true" />
           </folding>
         </state>
       </provider>
