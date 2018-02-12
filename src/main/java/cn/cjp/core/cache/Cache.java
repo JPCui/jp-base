@@ -22,9 +22,6 @@ public interface Cache {
 
     /**
      * 根据key构建一个带domain的key
-     * 
-     * @param key
-     * @return
      */
     public String getDomainKey(String key);
 
