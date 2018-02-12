@@ -12,125 +12,70 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import lombok.Data;
+
 /**
  * base of domain
- * @author Administrator
  *
+ * @author Administrator
  */
 @MappedSuperclass
-public class BaseEntityModel extends BaseModel{
-	
-	private static final long serialVersionUID = -8234288925841604769L;
-	
-	public BaseEntityModel() {
-	}
-	
-	public BaseEntityModel(long id) {
-		this.id = id;
-	}
+@Data
+public class BaseEntityModel extends BaseModel {
 
-	@Id
-	@Column(nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column(name="delete_flag", columnDefinition="int(1) default 0")
-	private int deleteFlag = 0;
-	
-	@Column(name="update_date")
-	private Date updateDate = new Date();
-	
-	@Column(name="save_date", columnDefinition="timestamp")
-	private Date saveDate;
-	
-	/**
-	 * 备注
-	 */
-	private String remarks;
+    private static final long serialVersionUID = -8234288925841604769L;
 
-	public Long getId() {
-		return id;
-	}
+    public BaseEntityModel() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public BaseEntityModel(long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the updateDate
-	 */
-	public Date getUpdateDate() {
-		return updateDate;
-	}
+    @Id
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	/**
-	 * @param updateDate the updateDate to set
-	 */
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    @Column(name = "delete_flag", columnDefinition = "int(1) default 0")
+    private int deleteFlag = 0;
 
-	/**
-	 * @return the deleteFlag
-	 */
-	public int getDeleteFlag() {
-		return deleteFlag;
-	}
+    @Column(name = "update_date")
+    private Date updateDate = new Date();
 
-	/**
-	 * @param deleteFlag the deleteFlag to set
-	 */
-	public void setDeleteFlag(int deleteFlag) {
-		this.deleteFlag = deleteFlag;
-	}
+    @Column(name = "save_date", columnDefinition = "timestamp")
+    private Date saveDate;
 
-	public Date getSaveDate() {
-		return saveDate;
-	}
+    /**
+     * 备注
+     */
+    private String remarks;
 
-	public void setSaveDate(Date saveDate) {
-		this.saveDate = saveDate;
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this,
+            ToStringStyle.MULTI_LINE_STYLE);
+    }
 
-	/**
-	 * @return the remarks
-	 */
-	public String getRemarks() {
-		return remarks;
-	}
+    @Override
+    public int hashCode() {
+        if (this.id == null) {
+            this.id = Long.valueOf(0);
+        }
+        return HashCodeBuilder.reflectionHashCode(this.id);
+    }
 
-	/**
-	 * @param remarks the remarks to set
-	 */
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (null != obj) {
+            if (obj instanceof BaseEntityModel) {
+                BaseEntityModel domain = (BaseEntityModel) obj;
+                if (this.id == domain.id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this,
-				ToStringStyle.MULTI_LINE_STYLE);
-	}
-
-	@Override
-	public int hashCode() {
-		if (this.id == null) {
-			this.id = Long.valueOf(0);
-		}
-		return HashCodeBuilder.reflectionHashCode(this.id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (null != obj) {
-			if (obj instanceof BaseEntityModel) {
-				BaseEntityModel domain = (BaseEntityModel) obj;
-				if (this.id == domain.id) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
 }
