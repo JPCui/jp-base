@@ -1,45 +1,62 @@
 package cn.cjp.utils;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Page {
+import lombok.Data;
 
+@Data
+public class Page<T> implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7659895996912452638L;
 	/**
 	 * 当前页
 	 */
-	public int currPage;
+	private int currPage;
 	/**
 	 * 下一页
 	 */
-	public int nextPage;
+	private int nextPage;
 	/**
 	 * size of page
 	 */
-	public int sizeOfPage;
+	private int sizeOfPage;
 	/**
 	 * 前一页
 	 */
-	public int prevPage;
+	private int prevPage;
 	/**
 	 * 总页数
 	 */
-	public int pageCount;
+	private int pageCount;
 	/**
 	 * 当前页开始的行号
 	 */
-	public long startRowInCurrPage;
+	private long startRowInCurrPage;
 	/**
 	 * 当前页结束的行号
 	 */
-	public long endRowInCurrPage;
+	private long endRowInCurrPage;
 	/**
 	 * 数据总数
 	 */
-	public long countOfData;
-	
-	private List<Object> resultList;
-	
+	private long countOfData;
+
+	private List<T> resultList;
+
 	private Object object;
+
+	public static <T> Page<T> fromSkipAndLimit(int skip, int limit, int count) {
+		int sizeOfPage = limit;
+		int currPage = (skip / limit) + 1;
+		int countOfData = count;
+
+		Page<T> page = new Page<>(currPage, sizeOfPage, countOfData);
+		return page;
+	}
 
 	/**
 	 * 初始化PageUtil
@@ -58,24 +75,24 @@ public class Page {
 
 		this.compute();
 	}
-	
-	public Page(int currPage, int sizeOfPage, long countOfData, List<Object> resultList) {
+
+	public Page(int currPage, int sizeOfPage, long countOfData, List<T> resultList) {
 		this(currPage, sizeOfPage, countOfData);
 		this.setResultList(resultList);
 	}
-	
+
 	/**
 	 * 计算出所有属性的值
 	 */
-	private void compute(){
+	private void compute() {
 		pageCount = (int) Math.ceil(countOfData * 1.0 / sizeOfPage);
 		prevPage = currPage > 1 ? currPage - 1 : currPage;
 		nextPage = currPage < pageCount ? currPage + 1 : pageCount;
-		
-		startRowInCurrPage = (this.currPage-1)* sizeOfPage + 1;
-		if(currPage == pageCount){
+
+		startRowInCurrPage = (this.currPage - 1) * sizeOfPage + 1;
+		if (currPage == pageCount) {
 			endRowInCurrPage = countOfData;
-		}else{
+		} else {
 			endRowInCurrPage = currPage * sizeOfPage;
 		}
 	}
@@ -83,14 +100,15 @@ public class Page {
 	/**
 	 * @return the resultList
 	 */
-	public List<Object> getResultList() {
+	public List<T> getResultList() {
 		return resultList;
 	}
 
 	/**
-	 * @param resultList the resultList to set
+	 * @param resultList
+	 *            the resultList to set
 	 */
-	public void setResultList(List<Object> resultList) {
+	public void setResultList(List<T> resultList) {
 		this.resultList = resultList;
 	}
 
@@ -102,7 +120,8 @@ public class Page {
 	}
 
 	/**
-	 * @param object the object to set
+	 * @param object
+	 *            the object to set
 	 */
 	public void setObject(Object object) {
 		this.object = object;
